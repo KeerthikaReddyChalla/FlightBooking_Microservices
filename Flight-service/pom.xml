@@ -56,10 +56,16 @@
 
         <!-- R2DBC - MySQL -->
         <dependency>
-            <groupId>com.github.jasync-sql</groupId>
-            <artifactId>jasync-r2dbc-mysql</artifactId>
-            <version>2.2.3</version>
-        </dependency>
+    		<groupId>io.asyncer</groupId>
+    		<artifactId>r2dbc-mysql</artifactId>
+    		<version>1.1.3</version> <!-- compatible with Spring Boot 3.x -->
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-data-r2dbc</artifactId>
+		</dependency>
+
+
 
         <!-- Reactive Feign -->
         <dependency>
