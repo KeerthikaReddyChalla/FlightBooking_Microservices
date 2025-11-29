@@ -33,7 +33,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+    			<groupId>com.playtika.reactivefeign</groupId>
+    			<artifactId>feign-reactor-bom</artifactId>
+    			<version>4.0.4</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+			</dependency>
+
         </dependencies>
+        
     </dependencyManagement>
 
     <dependencies>
@@ -67,7 +76,6 @@
         <dependency>
             <groupId>com.playtika.reactivefeign</groupId>
             <artifactId>feign-reactor-webclient</artifactId>
-            <version>${reactive-feign.version}</version>
         </dependency>
 
         <!-- Resilience4j Circuit Breaker -->
