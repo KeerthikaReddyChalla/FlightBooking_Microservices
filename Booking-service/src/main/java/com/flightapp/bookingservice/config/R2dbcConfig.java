@@ -22,7 +22,7 @@ public class R2dbcConfig {
         );
     }
 
-    @Bean
+    @Bean(name = "r2dbcEntityTemplate")
     public R2dbcEntityTemplate template(io.r2dbc.spi.ConnectionFactory connectionFactory) {
         return new R2dbcEntityTemplate(connectionFactory);
     }

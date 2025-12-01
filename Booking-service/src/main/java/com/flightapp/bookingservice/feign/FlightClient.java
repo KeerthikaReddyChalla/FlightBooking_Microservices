@@ -1,24 +1,25 @@
 package com.flightapp.bookingservice.feign;
 
 import com.flightapp.bookingservice.config.FeignConfig;
-import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import reactivefeign.webclient.ReactiveWebClientBuilder;
+import com.flightapp.bookingservice.dto.InventoryDTO;
+import com.flightapp.bookingservice.service.FlightClientFallback;
 
-@Component
-public class FlightClient {
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-	 private final ReactiveWebClientBuilder builder;
+import reactor.core.publisher.Mono;
 
-	    public FlightClient(ReactiveWebClientBuilder builder) {
-	        this.builder = builder;
-	    }
+@FeignClient(
+        name = "Flight-service",
+        configuration = FeignConfig.class,
+        fallback = FlightClientFallback.class
+)
+public interface FlightClient {
 
-	    public FlightServiceApi client(String url) {
-	        return builder.target(FlightServiceApi.class, url);
-	    }}
-}
-
+    @GetMapping("/api/flight/inventory/check")
+    Mono<String> checkInventory();
+    
+    @GetMapping("/api/flight/inventory/{id}")
+    Mono<InventoryDTO> getInventory(@PathVariable("id") Long id);
 }
