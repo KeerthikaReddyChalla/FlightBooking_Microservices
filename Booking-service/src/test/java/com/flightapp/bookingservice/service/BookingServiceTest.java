@@ -45,7 +45,7 @@ class BookingServiceTest {
     @Test
     void testBookSuccess() {
 
-        // Inventory returned by Flight-Service
+        
         InventoryDTO inv = InventoryDTO.builder()
                 .id(1L)
                 .airlineId(10L)
@@ -58,7 +58,7 @@ class BookingServiceTest {
                 .price(5000.0)
                 .build();
 
-        // Booking that will be saved
+       
         Booking savedBooking = Booking.builder()
                 .pnr("PNR-123AAA")
                 .flightId("1")
@@ -72,11 +72,11 @@ class BookingServiceTest {
                 .cancelled(false)
                 .build();
 
-        // Mock flightClient.getInventory()
+        
         Mockito.when(flightClient.getInventory(1L))
                 .thenReturn(Mono.just(inv));
 
-        // Mock circuit breaker to just pass through the Mono
+        
         @SuppressWarnings("unchecked")
         ReactiveCircuitBreaker cb = Mockito.mock(ReactiveCircuitBreaker.class);
 
@@ -84,9 +84,9 @@ class BookingServiceTest {
                 .thenReturn(cb);
 
         Mockito.when(cb.run(any(Mono.class), any()))
-                .thenAnswer(invocation -> invocation.getArgument(0)); // just return the original Mono
+                .thenAnswer(invocation -> invocation.getArgument(0)); 
 
-        // Mock repo.save()
+      
         Mockito.when(repo.save(any()))
                 .thenReturn(Mono.just(savedBooking));
 

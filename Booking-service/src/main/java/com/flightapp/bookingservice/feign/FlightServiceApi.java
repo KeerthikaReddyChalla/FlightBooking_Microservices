@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 public interface FlightServiceApi {
 
     @GetMapping("/api/flight/inventory/check")
-    Mono<String> checkService(); // sample call
+    Mono<String> checkService(); 
 }
